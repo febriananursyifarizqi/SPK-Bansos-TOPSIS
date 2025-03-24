@@ -3,15 +3,13 @@ import pandas as pd
 import numpy as np
 import os
 
-# Fungsi Normalisasi TOPSIS
-def normalize_topsis(df):
-    X = df.iloc[:, 1:].copy().astype(float)
-    X_norm = X / np.sqrt((X ** 2).sum(axis=0))
-    return X_norm
-
 # Fungsi Perhitungan TOPSIS
 def calculate_topsis(df):
-    X_norm = normalize_topsis(df)
+    # Normalisasi matriks
+    X = df.iloc[:, 1:].copy().astype(float)
+    X_norm = X / np.sqrt((X ** 2).sum(axis=0))
+
+    # Matriks ternormalisasi terbobot
     X_weighted = X_norm * list(weights.values())
     
     # Menentukan solusi ideal positif (A+) dan negatif (A-)
